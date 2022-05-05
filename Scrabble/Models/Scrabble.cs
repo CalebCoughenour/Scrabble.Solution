@@ -3,36 +3,52 @@ using System.Linq;
 
 namespace Scrabble
 {
-  public class WordScore
-  {
-   public char[] PointsOneArray {get; set;}
-   public char[] PointsTwoArray {get; set;}
-   public char[] PointsThreeArray {get; set;}
-   public char[] PointsFourArray {get; set;}
-   public char[] PointsFiveArray {get; set;}
-   public char[] PointsEightArray {get; set;}
-   public char[] PointsTenArray {get; set;}
-
-   public WordScore(char[] pointsOne, char [] pointsTwo, char [] pointsThree, char [] pointsFour, char [] pointsFive, char [] pointsEight, char [] pointsTen)
-    {
-    PointsOneArray = pointsOne;
-    PointsTwoArray = pointsTwo;
-    PointsThreeArray = pointsThree;
-    PointsFourArray = pointsFour;
-    PointsFiveArray = pointsFive;
-    PointsEightArray = pointsEight;
-    PointsTenArray = pointsTen;
-    }
-  } 
-    
   public class Player
   {
     public string UserWord {get; set;}
     public char[] UserWordArray {get; set;}
+    public int UserPoints {get; set;}
     public Player(string word)
     {
       UserWord = word;
-      UserWordArray = word.ToCharArray();
+      UserWordArray = word.ToLower().ToCharArray();
+      UserPoints = 0;
+    }
+
+    public int ScoreCalc()
+    {
+      foreach(char Character in UserWordArray)
+      {
+          if ((Character.Equals('a')) || (Character.Equals('e')) || (Character.Equals('i')) || (Character.Equals('o')) || (Character.Equals('u')) || (Character.Equals('l')) || (Character.Equals('n')) || (Character.Equals('r')) || (Character.Equals('s')) || (Character.Equals('t')))
+          {
+            UserPoints += 1;
+          }
+          else if ((Character.Equals('d')) || (Character.Equals('g')))
+          {
+            UserPoints += 2;
+          }
+          else if ((Character.Equals('b')) || (Character.Equals('c')) || (Character.Equals('m')) || (Character.Equals('p'))) 
+          {
+            UserPoints += 3;
+          }
+          else if ((Character.Equals('f')) || (Character.Equals('h')) || (Character.Equals('v')) || (Character.Equals('w')) || (Character.Equals('y')))
+          {
+            UserPoints += 4;
+          }
+          else if ((Character.Equals('k')))
+          {
+            UserPoints += 5;
+          }
+          else if ((Character.Equals('j')) || (Character.Equals('x')))
+          {
+            UserPoints += 8;
+          }
+          else if ((Character.Equals('q')) || (Character.Equals('z')))
+          {
+            UserPoints += 10;
+          }
+      }
+      return UserPoints;
     }
   }
 }
